@@ -1,0 +1,144 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  dev
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+castellatedMesh true;
+snap            true;
+addLayers       true;
+
+geometry
+{
+    object
+    {
+        type triSurfaceMesh;
+        file "object.stl";
+    }
+};
+
+// Settings for the castellatedMesh generation.
+castellatedMeshControls
+{
+    maxLocalCells 1000000;
+    maxGlobalCells 7000000;
+    minRefinementCells 2;
+    maxLoadUnbalance 0.10;
+    nCellsBetweenLevels 10;
+
+    features
+    (
+//         {
+//            file "object.eMesh";
+//            level 5;
+//         }
+    );
+
+    refinementSurfaces
+    {
+        object
+        {
+            level (6 6);
+            faceType wall;
+        }
+    }
+
+    // Resolve sharp angles
+    resolveFeatureAngle 180;
+
+    refinementRegions
+    {
+      object
+      {                             // refinement level 5 within 1.0 m
+          mode distance;            // refinement level 3 within 2.0 m
+          levels ((0.025 6) (0.05 5) (0.3 4) (0.50 3) (4 2) (10 1)); // levels must be ordered nearest first
+      }
+      box
+      {                             // refinement level 5 within 1.0 m
+          mode distance;            // refinement level 3 within 2.0 m
+          levels ((0.015 5) (0.04 4) (0.29 3) (0.49 2)); // levels must be ordered nearest first
+      }
+      box2
+      {                             // refinement level 5 within 1.0 m
+          mode inside;            // refinement level 3 within 2.0 m
+          levels ((1E15 6)); // levels must be ordered nearest first
+      }
+    }
+
+    locationInMesh (2 0 0.5);
+    allowFreeStandingZoneFaces false;
+}
+
+// Settings for the snapping.
+snapControls
+{
+    nSmoothPatch 3;
+    tolerance 2.0;
+    nSolveIter 30;
+    nRelaxIter 5;
+}
+
+// Settings for the layer addition.
+addLayersControls
+{
+    relativeSizes false;
+
+    layers
+    {
+        "object"
+        {
+            nSurfaceLayers 20; //10
+        }
+    }
+
+    expansionRatio 1.2;
+    firstLayerThickness 0.00005; // alternatively to finalLayerThickness
+    minThickness 0.00001;
+    nGrow 0;
+    featureAngle 120;
+    nRelaxIter 3;
+    nSmoothSurfaceNormals 50;
+    nSmoothNormals 50;
+    nSmoothThickness 100;
+    maxFaceThicknessRatio 0.8;
+    maxThicknessToMedialRatio 0.9;
+    minMedianAxisAngle 90;
+    nBufferCellsNoExtrude 0;
+    nLayerIter 50;
+}
+
+// Generic mesh quality settings. At any undoable phase these determine
+// where to undo.
+meshQualityControls
+{
+    maxNonOrtho 65;
+    maxBoundarySkewness 20;
+    maxInternalSkewness 4;
+    maxConcave 80;
+    minFlatness 0.5;
+    minVol 1e-13;
+    minTetQuality 1e-30;
+    minArea -1;
+    minTwist 0.02;
+    minDeterminant 0.0005;
+    minFaceWeight 0.02;
+    minVolRatio 0.01;
+    minTriangleTwist -1;
+    nSmoothScale 4;
+    errorReduction 0.75;
+}
+
+mergeTolerance 1E-9;
+
+
+// ************************************************************************* //
