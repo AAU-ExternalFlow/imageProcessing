@@ -3,7 +3,7 @@ from PIL import Image
 
 def image_rotate(image_path, degrees):
     # Get a list of files in the directory
-    files = os.listdir(directory)
+    files = os.listdir(image_path)
 
     # Filter the list to include only image files (you can modify the condition as per your file extensions)
     image_files = [file for file in files if file.endswith((".png", ".jpg", ".jpeg"))]
@@ -13,22 +13,22 @@ def image_rotate(image_path, degrees):
         return
 
     # Sort the image files based on their creation time (most recent first)
-    sorted_files = sorted(image_files, key=lambda file: os.path.getmtime(os.path.join(directory, file)), reverse=True)
+    sorted_files = sorted(image_files, key=lambda file: os.path.getmtime(os.path.join(image_path, file)), reverse=True)
 
     # Select the newest image file
-    newest_image_path = os.path.join(directory, sorted_files[0])
+    newest_image_path = os.path.join(image_path, sorted_files[0])
 
     # Rotate the newest image
     image = Image.open(newest_image_path)
     rotated_image = image.rotate(degrees, expand=True)
     rotated_image.save("rotated_image.png")
     rotated_image.show()
-    return image_path_rotated
+#     return image_path_rotated
 
-def image_canny(image_path, canny_value):
+# def image_canny(image_path, canny_value):
 
-    return image_path_canny
+#     return image_path_canny
 
 
-def show_image(image_path):
-    pass
+# def show_image(image_path):
+#     pass
