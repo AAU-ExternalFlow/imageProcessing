@@ -22,7 +22,7 @@ def image_rotate(image_path, degrees):
     # image = Image.open(newest_image_path)
     image=Image.open(image_path)
     rotated_image = image.rotate(degrees, expand=True)
-    rotated_image.save("rotated_image.png")
+    rotated_image.save("uploads/blurred_image.png")
     rotated_image.show()
 #     return image_path_rotated
 
