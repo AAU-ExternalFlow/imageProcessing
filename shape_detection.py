@@ -1,30 +1,41 @@
-import os
-from PIL import Image
+#import os
+import cv2
+#from PIL import Image
 
-def image_rotate(image_path, degrees):
-    # # Get a list of files in the directory
-    # files = os.listdir(image_path)
+def gaussian_blur(image, value):
+    return cv2.GaussianBlur(image, (value, value), 0)
 
-    # # Filter the list to include only image files (you can modify the condition as per your file extensions)
-    # image_files = [file for file in files if file.endswith((".png", ".jpg", ".jpeg"))]
+def canny(image, min_value, max_value):
+    return cv2.Canny(image, min_value, max_value)
 
-    # if not image_files:
-    #     print("No image files found in the directory.")
-    #     return
+def bitwise_not(image):
+    return cv2.bitwise_not(image)
 
-    # # Sort the image files based on their creation time (most recent first)
-    # sorted_files = sorted(image_files, key=lambda file: os.path.getmtime(os.path.join(image_path, file)), reverse=True)
+# def image_rotate(image_path, degrees):
+#     # # Get a list of files in the directory
+#     # files = os.listdir(image_path)
 
-    # # Select the newest image file
-    # newest_image_path = os.path.join(image_path, sorted_files[0])
+#     # # Filter the list to include only image files (you can modify the condition as per your file extensions)
+#     # image_files = [file for file in files if file.endswith((".png", ".jpg", ".jpeg"))]
 
-    # Rotate the newest image
-    # image = Image.open(newest_image_path)
-    image=Image.open(image_path)
-    rotated_image = image.rotate(degrees, expand=True)
-    rotated_image.save("uploads/blurred_image.png")
-    rotated_image.show()
-#     return image_path_rotated
+#     # if not image_files:
+#     #     print("No image files found in the directory.")
+#     #     return
+
+#     # # Sort the image files based on their creation time (most recent first)
+#     # sorted_files = sorted(image_files, key=lambda file: os.path.getmtime(os.path.join(image_path, file)), reverse=True)
+
+#     # # Select the newest image file
+#     # newest_image_path = os.path.join(image_path, sorted_files[0])
+
+#     # Rotate the newest image
+#     # image = Image.open(newest_image_path)
+#     image=Image.open(image_path)
+#     rotated_image = image.rotate(degrees, expand=True)
+#     rotated_image.save("uploads/blurred_image.png")
+#     rotated_image.show()
+# #     return image_path_rotated
+
 
 # def image_canny(image_path, canny_value):
 
