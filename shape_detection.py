@@ -2,8 +2,7 @@ import os
 import cv2
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
-from shapely.geometry import MultiPoint
-from shapely.ops import cascaded_union
+from concaveHull import Hull
 
 def gaussian_blur(image, value):
     return cv2.GaussianBlur(image, (value, value), 0)
@@ -20,13 +19,10 @@ def get_points(image):
     if len(points) == 0:
         raise Exception('No points detected after image processing. Try adjusting the parameters')
 
-    # Create a convex hull from the points
-    hull = cascaded_union(MultiPoint(points))
-
-    # Convert hull to a boundary polygon
-    boundary = hull.boundary
-
-    boundary_points = np.array(boundary.coords)
+    ch = Hull()
+    ch.loadpoints(points)
+    ch.calculatehull()
+    boundary_points = np.vstack(ch.boundary.exterior.coords.xy).T
 
     # Calculate pairwise distances between points
     D = pdist(boundary_points)
