@@ -2,7 +2,7 @@ import os
 import cv2
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
-from concaveHull import Hull
+from concaveHull import hull
 
 def gaussian_blur(image, value):
     return cv2.GaussianBlur(image, (value, value), 0)
@@ -19,7 +19,7 @@ def get_points(image):
     if len(points) == 0:
         raise Exception('No points detected after image processing. Try adjusting the parameters')
 
-    ch = Hull()
+    ch = hull()
     ch.loadpoints(points)
     ch.calculatehull()
     boundary_points = np.vstack(ch.boundary.exterior.coords.xy).T
