@@ -38,3 +38,8 @@ def get_points(image):
     for i, v in enumerate(boundary_points_shifted):
         coords[i] = np.dot(rotationMatrix, v) / N
     return coords
+
+def rotate_points(aoa, coords):
+        R = np.array([[np.cos(-float(aoa)*np.pi/180), -np.sin(-float(aoa)*np.pi/180)], [np.sin(-float(aoa)*np.pi/180), np.cos(-float(aoa)*np.pi/180)]])
+        o = np.atleast_2d((0, 0))
+        return np.squeeze((R @ (coords.T-o.T) + o.T).T)
