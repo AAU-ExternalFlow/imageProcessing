@@ -31,7 +31,7 @@ def get_points(image):
     vect = [[boundary_points[I_col, 0], boundary_points[I_col, 1]],
             [boundary_points[I_row, 0], boundary_points[I_row, 1]]]
     theta = np.arctan2(vect[1][1] - vect[0][1], vect[1][0] - vect[0][0])
-    rotationMatrix = np.array([[np.cos(-theta), -np.sin(-theta)], [np.sin(-theta), np.cos(-theta)]])
+    rotationMatrix = np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
 
     coords = np.zeros(boundary_points.shape)
     boundary_points_shifted = boundary_points - np.array([boundary_points[I_col, 0], boundary_points[I_col, 1]])
