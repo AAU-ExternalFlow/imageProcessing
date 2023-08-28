@@ -5,7 +5,7 @@ from scipy.spatial.distance import pdist, squareform
 from concaveHull import hull
 from stl import mesh
 import matplotlib.tri as mtri
-import shutil
+
 
 def gaussian_blur(image, value):
     return cv2.GaussianBlur(image, (value, value), 0)
@@ -70,7 +70,6 @@ def generate_STL(rotatedCoords):
             for j in range(3):
                 geometry.vectors[i][j] = xyzCoords.T[f[j],:]
         return geometry
-
 
 def generateSubFolder(folderName):
     os.makedirs(folderName, exist_ok=True)
