@@ -3,6 +3,9 @@ import cv2
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
 from concaveHull import hull
+from stl import mesh
+import matplotlib.tri as mtri
+import shutil
 
 def gaussian_blur(image, value):
     return cv2.GaussianBlur(image, (value, value), 0)
@@ -42,4 +45,34 @@ def get_points(image):
 def rotate_points(aoa, coords):
         R = np.array([[np.cos(-float(aoa)*np.pi/180), -np.sin(-float(aoa)*np.pi/180)], [np.sin(-float(aoa)*np.pi/180), np.cos(-float(aoa)*np.pi/180)]])
         o = np.atleast_2d((0, 0))
-        return np.squeeze((R @ (coords.T-o.T) + o.T).T)
+        coords_array = np.array(coords)
+        return np.squeeze((R @ (coords_array.T-o.T) + o.T).T)
+
+def flip_coords(coords):
+    flipped_coords = np.copy(coords)
+    flipped_coords[:, 0] = -flipped_coords[:, 0]
+    return flipped_coords
+
+def generate_STL(rotatedCoords):
+        Nz = 2 #Nz-1 number of triangles in z-direction. 2 for marginally lower file size
+        x,y = np.tile(rotatedCoords,(Nz,1)).T
+        z = np.repeat(np.linspace(0,1,Nz),len(rotatedCoords))
+        xyzCoords = np.vstack((x,y,z))
+
+        u = np.arange(len(rotatedCoords))
+        v = np.arange(Nz)
+        u, v = np.meshgrid(u, v)
+        u, v = u.flatten(), v.flatten()
+        tri = mtri.Triangulation(u, v)
+
+        geometry = mesh.Mesh(np.zeros(tri.triangles.shape[0], dtype=mesh.Mesh.dtype))
+        for i, f in enumerate(tri.triangles):
+            for j in range(3):
+                geometry.vectors[i][j] = xyzCoords.T[f[j],:]
+        return geometry
+
+
+def generateSubFolder(folderName):
+    os.makedirs(folderName, exist_ok=True)
+
+    
