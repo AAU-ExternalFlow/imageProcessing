@@ -5,6 +5,12 @@ from scipy.spatial.distance import pdist, squareform
 from concaveHull import hull
 from stl import mesh
 import matplotlib.tri as mtri
+import fileinput
+import subprocess
+import time
+import shutil
+import sys
+
 
 
 def gaussian_blur(image, value):
@@ -48,9 +54,16 @@ def rotate_points(aoa, coords):
         coords_array = np.array(coords)
         return np.squeeze((R @ (coords_array.T-o.T) + o.T).T)
 
-def flip_coords(coords):
+def flip_coords_hor(coords):
+    abs_max_x = np.abs(np.max(coords))
     flipped_coords = np.copy(coords)
-    flipped_coords[:, 0] = -flipped_coords[:, 0]
+    flipped_coords[:, 0] = abs_max_x - flipped_coords[:, 0]
+    return flipped_coords
+
+def flip_coords_ver(coords):
+    coords_array = np.array(coords)
+    flipped_coords = np.copy(coords_array)
+    flipped_coords[:, 1] = -flipped_coords[:, 1]
     return flipped_coords
 
 def generate_STL(rotatedCoords):
@@ -74,4 +87,88 @@ def generate_STL(rotatedCoords):
 def generateSubFolder(folderName):
     os.makedirs(folderName, exist_ok=True)
 
-    
+import fileinput
+import subprocess
+
+
+#Okay det virker næsten. Lige nu replacer den bare hele linje 12 i mesh.py filerne. Dog er der problemer med at de filer
+#den gemmer ikke ændres. Så omkring linje 495 bliver ikke ændret men den linje er ikke ens for alle. 
+#Måske kopier en fil ud til alle og så bare ændrer positionen af kameraet. 
+#Kameraet passer dårligt til andre aoa. 
+
+def paraviewResults(aoa_array):
+    file_paths = ['../imageProcessing/Mesh1.py', '../imageProcessing/Mesh2.py', '../imageProcessing/Mesh3.py', '../imageProcessing/U1.py', '../imageProcessing/U2.py', '../imageProcessing/P1.py', '../imageProcessing/P2.py']
+
+    # Define the common value
+    value = aoa_array[0]
+
+    # Define the lines to replace for each file
+    lines_to_replace = {
+        '../imageProcessing/Mesh1.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
+            (501, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/mesh1.png', renderView1, ImageResolution=[3000, 3000],\n")
+        ],
+        '../imageProcessing/Mesh2.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
+            (495, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/mesh2.png', renderView1, ImageResolution=[3000, 3000],\n")
+        ],
+        '../imageProcessing/Mesh3.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
+            (495, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/mesh3.png', renderView1, ImageResolution=[3000, 3000],\n")
+        ],
+        '../imageProcessing/U1.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
+            (604, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/U1.png', renderView1, ImageResolution=[3000, 3000],\n")
+        ],
+        '../imageProcessing/U2.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
+            (601, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/U2.png', renderView1, ImageResolution=[3000, 3000],\n")
+        ],
+        '../imageProcessing/P1.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
+            (539, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/P1.png', renderView1, ImageResolution=[3000, 3000],\n")
+        ],
+        '../imageProcessing/P2.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
+            (539, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/P2.png', renderView1, ImageResolution=[3000, 3000],\n")
+        ],
+    }
+
+    for i, value in enumerate(aoa_array):
+        previous_value = aoa_array[i - 1] if i > 0 else 0
+        print(f"Current value: {value}, Previous value: {previous_value}")
+
+        for file_path in file_paths:
+            replacements = lines_to_replace.get(file_path, [])  # Get the replacements for this file
+            with open(file_path, 'r') as f:
+                lines = f.readlines()
+
+            with open(file_path, 'w') as f:
+                for j, line in enumerate(lines, 1):
+                    for line_number, new_line in replacements:
+                        if j == line_number:
+                            f.writelines(new_line.format(value=value))
+                            break
+                    else:
+                        f.writelines(line)
+
+            subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', file_path])
+
+
+
+# def paraviewResults(aoa_array):
+#     file_paths = ['../imageProcessing/Mesh1.py', '../imageProcessing/Mesh2.py', '../imageProcessing/Mesh3.py']
+#     for file_path in file_paths:
+#         for value in aoa_array:
+#             for i, line in enumerate(fileinput.input(file_path, inplace=True)):
+#                 if 'FileName=' in line or 'SaveScreenshot' in line:
+#                     line = line.replace(f'FileName={aoa_array[0]}', f'FileName={value}')
+#                     line = line.replace(f'simulation/{aoa_array[0]}/simulation', f'simulation/{value}/simulation')
+#                 print(line, end='')
+#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/Mesh1.py'])
+#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/Mesh2.py'])
+#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/Mesh3.py'])
+#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/P1.py'])
+#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/P2.py'])
+#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/U1.py'])
+#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/U2.py'])
