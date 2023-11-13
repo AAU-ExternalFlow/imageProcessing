@@ -104,33 +104,33 @@ def paraviewResults(aoa_array):
 
     # Define the lines to replace for each file
     lines_to_replace = {
-        '../imageProcessing/Mesh1.py': [
-            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
-            (501, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/mesh1.png', renderView1, ImageResolution=[3000, 3000],\n")
+        '/externalflow/imageProcessing/Mesh1.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
+            (501, "SaveScreenshot('/externalflow/assets/{value}/mesh1.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
-        '../imageProcessing/Mesh2.py': [
-            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
-            (495, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/mesh2.png', renderView1, ImageResolution=[3000, 3000],\n")
+        '/externalflow/imageProcessing/Mesh2.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
+            (495, "SaveScreenshot('/externalflow/assets/{value}/mesh2.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
-        '../imageProcessing/Mesh3.py': [
-            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
-            (495, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/mesh3.png', renderView1, ImageResolution=[3000, 3000],\n")
+        '/externalflow/imageProcessing/Mesh3.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
+            (495, "SaveScreenshot('/externalflow/assets/{value}/mesh3.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
-        '../imageProcessing/U1.py': [
-            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
-            (604, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/U1.png', renderView1, ImageResolution=[3000, 3000],\n")
+        '/externalflow/imageProcessing/U1.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
+            (604, "SaveScreenshot('/externalflow/assets/{value}/U1.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
-        '../imageProcessing/U2.py': [
-            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
-            (601, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/U2.png', renderView1, ImageResolution=[3000, 3000],\n")
+        '/externalflow/imageProcessing/U2.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
+            (601, "SaveScreenshot('/externalflow/assets/{value}/U2.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
-        '../imageProcessing/P1.py': [
-            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
-            (539, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/P1.png', renderView1, ImageResolution=[3000, 3000],\n")
+        '/externalflow/imageProcessing/P1.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
+            (539, "SaveScreenshot('/externalflow/assets/{value}/P1.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
-        '../imageProcessing/P2.py': [
-            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D:\\\\Skole\\\\Uni\\\\ExternalFlow\\\\simulation\\\\{value}\\\\simulation\\\\foam.foam\')\n'),
-            (539, "SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/{value}/P2.png', renderView1, ImageResolution=[3000, 3000],\n")
+        '/externalflow/imageProcessing/P2.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
+            (539, "SaveScreenshot('/externalflow/assets/{value}/P2.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
     }
 
@@ -152,7 +152,7 @@ def paraviewResults(aoa_array):
                     else:
                         f.writelines(line)
 
-            subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', file_path])
+            subprocess.run(['/externalflow/paraview/bin/pvpython.exe', file_path])
 
 
 
