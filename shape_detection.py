@@ -152,7 +152,7 @@ def paraviewResults(aoa_array):
                     else:
                         f.writelines(line)
 
-            subprocess.run(['/externalflow/paraview/bin/pvpython.exe', file_path])
+            subprocess.run(['/externalflow/paraview/bin/pvpython', file_path])
 
 
 
