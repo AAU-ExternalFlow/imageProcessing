@@ -97,7 +97,7 @@ import subprocess
 #Kameraet passer dårligt til andre aoa. 
 
 def paraviewResults(aoa_array):
-    file_paths = ['/externalflow/imageProcessing/Mesh1.py', '../imageProcessing/Mesh2.py', '../imageProcessing/Mesh3.py', '../imageProcessing/U1.py', '../imageProcessing/U2.py', '../imageProcessing/P1.py', '../imageProcessing/P2.py']
+    file_paths = ['/externalflow/imageProcessing/Mesh1.py', '/externalflow/imageProcessing/Mesh2.py', '/externalflow/imageProcessing/Mesh3.py', '/externalflow/imageProcessing/U1.py', '/externalflow/imageProcessing/U2.py', '/externalflow/imageProcessing/P1.py', '/externalflow/imageProcessing/P2.py']
 
     # Define the common value
     value = aoa_array[0]
