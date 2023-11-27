@@ -117,7 +117,7 @@ def paraviewResults(aoa_array):
             (495, "SaveScreenshot('/externalflow/assets/{value}/mesh3.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
         '/externalflow/imageProcessing/U1.py': [
-            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'D/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
             (604, "SaveScreenshot('/externalflow/assets/{value}/U1.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
         '/externalflow/imageProcessing/U2.py': [
