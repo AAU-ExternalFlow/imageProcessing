@@ -97,7 +97,7 @@ import subprocess
 #Kameraet passer dårligt til andre aoa. 
 
 def paraviewResults(aoa_array):
-    file_paths = ['/externalflow/imageProcessing/Mesh1.py', '/externalflow/imageProcessing/Mesh2.py', '/externalflow/imageProcessing/Mesh3.py', '/externalflow/imageProcessing/U1.py', '/externalflow/imageProcessing/U2.py', '/externalflow/imageProcessing/P1.py', '/externalflow/imageProcessing/P2.py']
+    file_paths = ['/externalflow/imageProcessing/Mesh1.py', '/externalflow/imageProcessing/Mesh2.py', '/externalflow/imageProcessing/Mesh3.py', '/externalflow/imageProcessing/Mesh4.py', '/externalflow/imageProcessing/U1.py', '/externalflow/imageProcessing/U2.py', '/externalflow/imageProcessing/P1.py', '/externalflow/imageProcessing/P2.py']
 
     # Define the common value
     value = aoa_array[0]
@@ -115,6 +115,10 @@ def paraviewResults(aoa_array):
         '/externalflow/imageProcessing/Mesh3.py': [
             (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
             (495, "SaveScreenshot('/externalflow/assets/{value}/mesh3.png', renderView1, ImageResolution=[3000, 3000],\n")
+        ],
+        '/externalflow/imageProcessing/Mesh4.py': [
+            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
+            (495, "SaveScreenshot('/externalflow/assets/{value}/mesh4.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
         '/externalflow/imageProcessing/U1.py': [
             (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
@@ -154,21 +158,3 @@ def paraviewResults(aoa_array):
 
             subprocess.run(['/externalflow/paraview/bin/pvpython', file_path])
 
-
-
-# def paraviewResults(aoa_array):
-#     file_paths = ['../imageProcessing/Mesh1.py', '../imageProcessing/Mesh2.py', '../imageProcessing/Mesh3.py']
-#     for file_path in file_paths:
-#         for value in aoa_array:
-#             for i, line in enumerate(fileinput.input(file_path, inplace=True)):
-#                 if 'FileName=' in line or 'SaveScreenshot' in line:
-#                     line = line.replace(f'FileName={aoa_array[0]}', f'FileName={value}')
-#                     line = line.replace(f'simulation/{aoa_array[0]}/simulation', f'simulation/{value}/simulation')
-#                 print(line, end='')
-#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/Mesh1.py'])
-#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/Mesh2.py'])
-#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/Mesh3.py'])
-#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/P1.py'])
-#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/P2.py'])
-#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/U1.py'])
-#             subprocess.run(['D:\\Program Files\\ParaView 5.11.1\\bin\\pvpython.exe', '../imageProcessing/U2.py'])

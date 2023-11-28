@@ -592,8 +592,8 @@ layout1 = GetLayout()
 layout1.SetSize(1612, 804)
 
 # current camera placement for renderView1
-renderView1.CameraPosition = [-0.9548296285448152, 0.08256044941387648, 110.34910626658501]
-renderView1.CameraFocalPoint = [-0.9548296285448152, 0.08256044941387648, 1.0499999821186066]
+renderView1.CameraPosition = [0, 0, 110.34910626658501]
+renderView1.CameraFocalPoint = [0, 0, 1.0499999821186066]
 renderView1.CameraParallelScale = 0.22056507315833418
 renderView1.CameraParallelProjection = 1
 

@@ -486,13 +486,13 @@ layout1 = GetLayout()
 layout1.SetSize(1612, 804)
 
 # current camera placement for renderView1
-renderView1.CameraPosition = [0, 0, 110.34910626658501]
-renderView1.CameraFocalPoint = [0, 0, 1.0499999821186066]
+renderView1.CameraPosition = [1, 0.0940167161085186, 110.34910626658501]
+renderView1.CameraFocalPoint = [1, 0.0940167161085186, 1.0499999821186066]
 renderView1.CameraParallelScale = 0.17582593151360776
 renderView1.CameraParallelProjection = 1
 
 # save screenshot
-SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/10/mesh3.png', renderView1, ImageResolution=[3000, 3000],
+SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/10/mesh4.png', renderView1, ImageResolution=[3000, 3000],
     FontScaling='Scale fonts proportionally',
     OverrideColorPalette='',
     StereoMode='No change',
