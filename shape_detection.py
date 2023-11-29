@@ -97,7 +97,7 @@ import subprocess
 #Kameraet passer dårligt til andre aoa. 
 
 def paraviewResults(aoa_array):
-    file_paths = ['/externalflow/imageProcessing/Mesh1.py', '/externalflow/imageProcessing/Mesh2.py', '/externalflow/imageProcessing/Mesh3.py', '/externalflow/imageProcessing/Mesh4.py', '/externalflow/imageProcessing/U1.py', '/externalflow/imageProcessing/U2.py', '/externalflow/imageProcessing/P1.py', '/externalflow/imageProcessing/P2.py']
+    file_paths = ['/externalflow/imageProcessing/Mesh1.py', '/externalflow/imageProcessing/Mesh2.py', '/externalflow/imageProcessing/Mesh3.py', '/externalflow/imageProcessing/U1.py', '/externalflow/imageProcessing/U2.py', '/externalflow/imageProcessing/P1.py', '/externalflow/imageProcessing/P2.py']
 
     # Define the common value
     value = aoa_array[0]
@@ -115,10 +115,6 @@ def paraviewResults(aoa_array):
         '/externalflow/imageProcessing/Mesh3.py': [
             (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
             (495, "SaveScreenshot('/externalflow/assets/{value}/mesh3.png', renderView1, ImageResolution=[3000, 3000],\n")
-        ],
-        '/externalflow/imageProcessing/Mesh4.py': [
-            (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
-            (495, "SaveScreenshot('/externalflow/assets/{value}/mesh4.png', renderView1, ImageResolution=[3000, 3000],\n")
         ],
         '/externalflow/imageProcessing/U1.py': [
             (12, 'foamfoam = OpenFOAMReader(registrationName=\'foam.foam\', FileName=\'/externalflow/simulation/{value}/simulation/foam.foam\')\n'),
