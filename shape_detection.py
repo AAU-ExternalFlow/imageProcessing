@@ -10,7 +10,8 @@ import subprocess
 import time
 import shutil
 import sys
-
+import fileinput
+import subprocess
 
 
 def gaussian_blur(image, value):
@@ -87,14 +88,6 @@ def generate_STL(rotatedCoords):
 def generateSubFolder(folderName):
     os.makedirs(folderName, exist_ok=True)
 
-import fileinput
-import subprocess
-
-
-#Okay det virker næsten. Lige nu replacer den bare hele linje 12 i mesh.py filerne. Dog er der problemer med at de filer
-#den gemmer ikke ændres. Så omkring linje 495 bliver ikke ændret men den linje er ikke ens for alle. 
-#Måske kopier en fil ud til alle og så bare ændrer positionen af kameraet. 
-#Kameraet passer dårligt til andre aoa. 
 
 def paraviewResults(aoa_array):
     file_paths = ['/externalflow/imageProcessing/Mesh1.py', '/externalflow/imageProcessing/Mesh2.py', '/externalflow/imageProcessing/Mesh3.py', '/externalflow/imageProcessing/U1.py', '/externalflow/imageProcessing/U2.py', '/externalflow/imageProcessing/P1.py', '/externalflow/imageProcessing/P2.py']
