@@ -9,11 +9,7 @@ from paraview.simple import *
 paraview.simple._DisableFirstRenderCameraReset()
 
 # create a new 'OpenFOAMReader'
-<<<<<<< Updated upstream
-foamfoam = OpenFOAMReader(registrationName='foam.foam', FileName='D:\\Skole\\Uni\\ExternalFlow\\simulation\\10\\simulation\\foam.foam')
-=======
 foamfoam = OpenFOAMReader(registrationName='foam.foam', FileName='D:\\Skole\\Uni\\ExternalFlow\\simulation\\0\\simulation\\foam.foam')
->>>>>>> Stashed changes
 foamfoam.SkipZeroTime = 1
 foamfoam.CaseType = 'Reconstructed Case'
 foamfoam.LabelSize = '32-bit'
@@ -534,22 +530,13 @@ layout1 = GetLayout()
 layout1.SetSize(1612, 804)
 
 # current camera placement for renderView1
-<<<<<<< Updated upstream
 renderView1.CameraPosition = [0, 0, 110.34910626658501]
 renderView1.CameraFocalPoint = [0, 0, 1.0499999821186066]
-=======
-renderView1.CameraPosition = [-0.4258127878382963, 0.027501461627380153, 110.34910626658501]
-renderView1.CameraFocalPoint = [-0.4258127878382963, 0.027501461627380153, 1.0499999821186066]
->>>>>>> Stashed changes
 renderView1.CameraParallelScale = 1.0836059869616879
 renderView1.CameraParallelProjection = 1
 
 # save screenshot
-<<<<<<< Updated upstream
 SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/10/P1.png', renderView1, ImageResolution=[3000, 3000],
-=======
-SaveScreenshot('D:/Skole/Uni/ExternalFlow/simulation/0/simulation/P1.png', renderView1, ImageResolution=[3000, 3000],
->>>>>>> Stashed changes
     FontScaling='Scale fonts proportionally',
     OverrideColorPalette='',
     StereoMode='No change',

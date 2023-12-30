@@ -9,11 +9,7 @@ from paraview.simple import *
 paraview.simple._DisableFirstRenderCameraReset()
 
 # create a new 'OpenFOAMReader'
-<<<<<<< Updated upstream
-foamfoam = OpenFOAMReader(registrationName='foam.foam', FileName='D:\\Skole\\Uni\\ExternalFlow\\simulation\\10\\simulation\\foam.foam')
-=======
 foamfoam = OpenFOAMReader(registrationName='foam.foam', FileName='D:\\Skole\\Uni\\ExternalFlow\\simulation\\0\\simulation\\foam.foam')
->>>>>>> Stashed changes
 foamfoam.SkipZeroTime = 1
 foamfoam.CaseType = 'Reconstructed Case'
 foamfoam.LabelSize = '32-bit'
@@ -502,12 +498,8 @@ renderView1.CameraParallelScale = 19.852126315215518
 renderView1.CameraParallelProjection = 1
 
 # save screenshot
-<<<<<<< Updated upstream
 SaveScreenshot('D:/Skole/Uni/ExternalFlow/dashWebApp/assets/10/mesh1.png', renderView1, ImageResolution=[3000, 3000],
 #SaveScreenshot('D:/Skole/Uni/ExternalFlow/sdashWebApp/assets/0/mesh1.png', renderView1, ImageResolution=[3000, 3000],
-=======
-SaveScreenshot('mesh1.png', renderView1, ImageResolution=[3000, 3000],
->>>>>>> Stashed changes
     FontScaling='Scale fonts proportionally',
     OverrideColorPalette='',
     StereoMode='No change',
