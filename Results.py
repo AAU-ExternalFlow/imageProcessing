@@ -47,12 +47,13 @@ def paraviewResults(aoa_array):
         ],
     }
 
+    # For each aoa entry, run all paraview scripts. Replaces the lines specified above for each aoa.
     for i, value in enumerate(aoa_array):
         previous_value = aoa_array[i - 1] if i > 0 else 0
         print(f"Current value: {value}, Previous value: {previous_value}")
 
         for file_path in file_paths:
-            replacements = lines_to_replace.get(file_path, [])  # Get the replacements for this file
+            replacements = lines_to_replace.get(file_path, [])
             with open(file_path, 'r') as f:
                 lines = f.readlines()
 
