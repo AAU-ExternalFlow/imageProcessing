@@ -1,15 +1,15 @@
-import os
+# import os
 import cv2
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
 from concaveHull import hull
-from stl import mesh
-import matplotlib.tri as mtri
-import fileinput
+# from stl import mesh
+# import matplotlib.tri as mtri
+# import fileinput
 # import subprocess
-import time
-import shutil
-import sys
+# import time
+# import shutil
+# import sys
 import fileinput
 # import subprocess
 
